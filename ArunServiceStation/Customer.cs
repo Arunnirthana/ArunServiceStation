@@ -11,17 +11,40 @@ namespace ArunServiceStation
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Customer
     {
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "The VehicleNumbers is required")]
         public string VehicleNumber { get; set; }
+
+        [Required(ErrorMessage = "The MobileNumber is required")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Mobile Number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string MobileNumber { get; set; }
+
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "The Category is required")]
         public Nullable<int> Category { get; set; }
+
+        [Required(ErrorMessage = "The Provider is required")]
         public string Provider { get; set; }
+
+        [Required(ErrorMessage = "The AppointmentDate is required")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+
+        public Nullable<System.DateTime> AppointmentDate { get; set; }
+
+        [Required(ErrorMessage = "The Timeslot is required")]
         public string Timeslot { get; set; }
-    
+
         public virtual Category Category1 { get; set; }
     }
 }

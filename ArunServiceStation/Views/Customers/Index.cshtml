@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Index</h2>
+    <h2>History</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -24,6 +24,9 @@
             @Html.DisplayNameFor(model => model.Provider)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Timeslot)
         </th>
         <th>
@@ -33,31 +36,34 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Provider)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Timeslot)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category1.Catagory)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.VehicleNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MobileNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Provider)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AppointmentDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Timeslot)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category1.Catagory)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+</tr>
 }
 
 </table>
