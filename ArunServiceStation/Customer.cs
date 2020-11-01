@@ -12,6 +12,7 @@ namespace ArunServiceStation
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class Customer
     {
@@ -44,7 +45,7 @@ namespace ArunServiceStation
 
         [Required(ErrorMessage = "The Timeslot is required")]
         public string Timeslot { get; set; }
-
+        public List<SelectListItem> TimeSlots { get; set; }
         public virtual Category Category1 { get; set; }
     }
 }

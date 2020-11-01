@@ -5,7 +5,7 @@
     ViewBag.Title = "Welcome to Register Service";
 }
 
-    <h2> Welcome to Register Service</h2>
+<h2> Welcome to Register Service</h2>
 
 
 @using (Html.BeginForm())
@@ -16,6 +16,7 @@
         <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.LabelFor(model => model.VehicleNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -66,13 +67,13 @@
                 @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
 
-                </div>
+            </div>
             <div class="col-md-5">
 
-             
                 @Html.DropDownListFor(model => model.Timeslot, new SelectList(ViewBag.Timeslots, "Value", "Text"), "Select TimeSlot", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Timeslot, "", new { @class = "text-danger" })
             </div>
+
         </div>
 
         <div class="form-group">
@@ -84,10 +85,54 @@
 }
 
 @*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
+<script>
+
+
+            $("#Timeslot").attr("disabled", true);
+            var timeSlot = $('#Timeslot');
+
+            //Attach the change event
+            $("#AppointmentDate").change(function (evt) {
+                //check if value is not equal to Select or not
+                if ($(this).val() != "0") {
+                    //Enable the textbox
+                    $("#Timeslot").attr("disabled", false);
+                    $("#Timeslot").val($(this).text());
+                    
+                    // This stops the Postback
+                    evt.preventDefault();
+                }
+                $("#Timeslot").attr("disabled", false);
+
+                $.getJSON('@Url.Action("Timeslot")', { AppointmentDate: $(this).val() }, function (slots) {
+                    if (slots != null && !jQuery.isEmptyObject(slots))
+                        {
+
+                            $('#Timeslot option').remove();
+                            timeSlot.append($('<option/>', {
+                                value: null,
+                                text: "Select TimeSlot"
+                            }));
+
+                        $.each(slots, function (index, slot) {
+                                timeSlot.append($('<option/>', {
+                                    value: slot.Value,
+                                    text: slot.Text,
+                                    disabled: slot.disabled
+                                }));
+                            });
+
+                        };
+                    });
+            });
+
+</script>
+
+   
 }
