@@ -52,9 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Provider, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Provider, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Provider, "", new { @class = "text-danger" })*@
-
+             
                 @Html.DropDownListFor(model => model.Provider, new SelectList(Enum.GetValues(typeof(Provider))), "Select Provider", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Provider, "", new { @class = "text-danger" })
             </div>
@@ -84,9 +82,7 @@
     </div>
 }
 
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
